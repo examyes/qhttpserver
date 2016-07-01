@@ -1,4 +1,4 @@
-/* Based on src/http/ngx_http_parse.c from NGINX copyright Igor Sysoev
+﻿/* Based on src/http/ngx_http_parse.c from NGINX copyright Igor Sysoev
  *
  * Additional changes are licensed under the same terms as NGINX and
  * copyright Joyent, Inc. and other Node contributors. All rights reserved.
@@ -1828,11 +1828,12 @@ reexecute:
 
       case s_headers_done:
       {
+        int hasBody;
         STRICT_CHECK(ch != LF);
 
         parser->nread = 0;
 
-        int hasBody = parser->flags & F_CHUNKED ||
+        hasBody = parser->flags & F_CHUNKED ||
           (parser->content_length > 0 && parser->content_length != ULLONG_MAX);
         if (parser->upgrade && (parser->method == HTTP_CONNECT ||
                                 (parser->flags & F_SKIPBODY) || !hasBody)) {
